@@ -1,0 +1,47 @@
+#EXTM3U
+#EXTINF:0,Ljubljana Študent
+http://kruljo.radiostudent.si:8000/ehiq
+#EXTINF:0,Maribor Študent
+http://frekvenca.eu:8000/radiomars.mp3
+#EXTINF:0,Val 202
+http://mp3.rtvslo.si/val202
+#EXTINF:0,Radio Žica
+http://live.1chi.si/zica
+#EXTINF:0,SKY.FM Roots Reggae
+http://pub7.sky.fm:80/sky_rootsreggae
+#EXTINF:0,SKY.FM Classic Rock
+http://pub1.sky.fm:80/sky_classicrock
+#EXTINF:0,DI.fm - Chillout
+http://pub5.di.fm:80/di_chillout
+#EXTINF:0,DI.fm - Ambient
+http://pub6.di.fm:80/di_ambient
+#EXTINF:0,DI.fm - Chillout Dreams
+http://pub5.di.fm:80/di_chilloutdreams
+#EXTINF:0,Soma FM - Groove Salad
+http://173.239.76.146:80
+#EXTINF:0,Bassdrive
+http://shouthost.com.18.streams.bassdrive.com:8398
+#EXTINF:0,Zagreb Študent
+http://161.53.122.184:8000/AAC128.aac
+#EXTINF:0,Radio 808
+http://stream.radio808.info:80/stream.nsv
+#EXTINF:0,Novi Radio Beograd
+http://gal.bitsyu.net:8000/
+#EXTINF:0,Avstrijski Študent
+http://www.cr944.at:8000/cr944-high
+#EXTINF:0,Dubstep.fm
+http://relay1.dubstep.fm:80
+#EXTINF:0,Psychedelik Ambient
+http://88.191.102.69:8002
+#EXTINF:0,Duquesne Student Radio
+http://165.190.174.92:8005/
+#EXTINF:0,UMKC Student Radio
+http://96.31.90.115:8220/;stream/1
+#EXTINF:0,KCSC.ASChico.com
+http://132.241.56.35:8000
+#EXTINF:0,Radio Airtlift
+http://174.37.16.73:6573/Live
+#EXTINF:0,New Zealand's southern Student Radio
+http://r1.co.nz:8090/r1-high.mp3
+#EXTINF:0,SKY.FM Classical
+http://pub7.sky.fm:80/sky_classical
