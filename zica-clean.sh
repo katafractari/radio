@@ -12,3 +12,4 @@ find "$dir" -regex ".*service not available.*" -delete
 find "$dir" -size +15M -delete
 find "$dir" -type f -size -1024k -delete
 find "$dir" -iregex '.*Siddharta.*' -delete
+find "$dir" -iregex '.*Bryan Adams.*' -delete
