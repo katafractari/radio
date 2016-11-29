@@ -2,14 +2,14 @@
 
 dir="data/Radio ZICA"
 
-find "$dir" -regex ".*([0-9]+).*" -delete
-find "$dir" -regex ".*Not Available Right Now.*" -delete
-find "$dir" -regex ".*spletni radio kratka.*" -delete
-find "$dir" -regex ".*radio zica zari in pali.*" -delete
-find "$dir" -regex ".*Radio zica - spletni radio short short.*"  -delete
-find "$dir" -regex ".*drblues.*" -delete
-find "$dir" -regex ".*service not available.*" -delete
-find "$dir" -size +15M -delete
-find "$dir" -type f -size -1024k -delete
-find "$dir" -iregex '.*Siddharta.*' -delete
-find "$dir" -iregex '.*Bryan Adams.*' -delete
+find "$dir" -regex ".*([0-9]+).*" -ls -delete
+find "$dir" -regex ".*Not Available Right Now.*" -ls -delete
+find "$dir" -regex ".*spletni radio kratka.*" -ls -delete
+find "$dir" -regex ".*radio zica zari in pali.*" -ls -delete
+find "$dir" -regex ".*Radio zica - spletni radio short short.*"  -ls -delete
+find "$dir" -regex ".*drblues.*" -ls -delete
+find "$dir" -regex ".*service not available.*" -ls -delete
+find "$dir" -size +15M -ls -delete
+find "$dir" -type f -size -1024k -ls -delete
+find "$dir" -iregex '.*Siddharta.*' -ls -delete
+find "$dir" -iregex '.*Bryan Adams.*' -ls -delete
