@@ -13,3 +13,4 @@ find "$dir" -size +15M -ls -delete
 find "$dir" -type f -size -1024k -ls -delete
 find "$dir" -iregex '.*Siddharta.*' -ls -delete
 find "$dir" -iregex '.*Bryan Adams.*' -ls -delete
+find "$dir" -regex ".*Matisyahu.*" -ls -delete
