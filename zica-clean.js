@@ -21,18 +21,18 @@ const findAndRemove = (args) => {
     find.stdout.on("data", (data) => {
         console.log(data.toString())
     });
-}
+};
 
 const findRemoveDuplicates = () => {
     spawn("ls", [dir])
         .stdout.on("data", (data) => {
             let filenames = data.toString().split("\n");
             filenames.forEach((filename) => {
-                console.log(filename)
+                console.log(filename);
             })
 
         });
-}
+};
 
 //findAndRemoves.forEach((args) => findAndRemove(args));
 findRemoveDuplicates();
