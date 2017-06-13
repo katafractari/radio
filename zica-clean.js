@@ -24,13 +24,20 @@ const findAndRemove = (args) => {
 };
 
 const findRemoveDuplicates = () => {
-    spawn("ls", [dir])
+    spawn("find", [dir, "-mindepth", "1", "-printf", "%f\t%s\n"])
         .stdout.on("data", (data) => {
-            let filenames = data.toString().split("\n");
-            filenames.forEach((filename) => {
-                console.log(filename);
-            })
+            let filenamesSizes = data
+                .toString()
+                .split("\n")
+                .filter((filenameSize) => filenameSize !== "")
+                .map((filenameSize) => filenameSize.split("\t"));
 
+            let fileGroups = [];
+            let currentFile;
+            filenamesSizes.forEach((filename) => {
+                console.log(filename[0])
+                currentFile = filename[0]
+            })
         });
 };
 
