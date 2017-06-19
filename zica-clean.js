@@ -2,6 +2,7 @@ const fs = require("fs");
 const spawn = require("child_process").spawn;
 
 const dir = "data/Radio ZICA";
+const dryRun = true;
 
 let findAndRemoves = [
     ["-size", "+15M"],
@@ -57,24 +58,17 @@ const findRemoveDuplicates = () => {
                             maxIndex = index;
                         }
                     });
-                    console.log(groups[key]);
+                    // console.log(groups[key]);
                     groups[key]
                         .filter((file, index) => index !== maxIndex)
                         .forEach((file) => {
-                            fs.unlinkSync(`${dir}/${file.name}`, error => {
-                                if(error) throw error;
-                                console.log(`Deleted ${file.name}`);
-                            })
+                            deleteFile(file.name);
                         });
 
                     let oldFilename = groups[key][maxIndex].name;
                     let newFilename = stripDuplicateNumber(groups[key][maxIndex].name);
                     if(oldFilename.match(/\(\d+\)\.mp3$/)) {
-                        console.log(`Renaming ${oldFilename} -> ${newFilename}`);
-                        fs.renameSync(`${dir}/${oldFilename}`, `${dir}/${newFilename}`, error => {
-                            if(error) throw error;
-                            console.log(`Renamed ${oldFilename}`);
-                        });
+                        renameFile(oldFilename, newFilename);
                     }
                 });
         });
@@ -82,6 +76,25 @@ const findRemoveDuplicates = () => {
 
 const stripDuplicateNumber = (filename) => {
     return filename.replace(/ \(.*\)\.mp3/, ".mp3");
+};
+
+const deleteFile = (filename) => {
+    if(!dryRun) {
+        fs.unlinkSync(`${dir}/${filename}`, error => {
+            if(error) throw error;
+            console.log(`Deleted ${filename}`);
+        });
+    }
+};
+
+const renameFile = (oldFilename, newFilename) => {
+    console.log(`Renaming ${oldFilename} -> ${newFilename}`);
+    if(!dryRun) {
+        fs.renameSync(`${dir}/${oldFilename}`, `${dir}/${newFilename}`, error => {
+            if(error) throw error;
+            console.log(`Renamed ${oldFilename}`);
+        });
+    }
 };
 
 //findAndRemoves.forEach((args) => findAndRemove(args));
