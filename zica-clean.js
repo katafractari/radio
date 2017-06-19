@@ -1,3 +1,4 @@
+const fs = require("fs");
 const spawn = require("child_process").spawn;
 
 const dir = "data/Radio ZICA";
@@ -24,21 +25,63 @@ const findAndRemove = (args) => {
 };
 
 const findRemoveDuplicates = () => {
-    spawn("find", [dir, "-mindepth", "1", "-printf", "%f\t%s\n"])
+    spawn("sh", ["-c", `find "${dir}" -mindepth 1 -printf "%f\t%s\n" | sort`])
         .stdout.on("data", (data) => {
-            let filenamesSizes = data
+            let groups = {};
+            data
                 .toString()
                 .split("\n")
-                .filter((filenameSize) => filenameSize !== "")
-                .map((filenameSize) => filenameSize.split("\t"));
+                .filter(filenameSize => filenameSize !== "")
+                .map(filenameSize => {
+                    let fs = filenameSize.split("\t");
+                    return { name: fs[0], size: fs[1] };
+                })
+                .map(filenameSize => {
+                    let key = stripDuplicateNumber(filenameSize.name);
+                    if(key in groups) {
+                        groups[key].push(filenameSize);
+                    } else {
+                        groups[key] = [ filenameSize ];
+                    }
+                });
 
-            let fileGroups = [];
-            let currentFile;
-            filenamesSizes.forEach((filename) => {
-                console.log(filename[0])
-                currentFile = filename[0]
-            })
+            Object.keys(groups)
+                .filter((key) => groups[key].length > 1)
+                .forEach((key) => {
+                    console.log(`Cleaning ${key}`);
+                    let maxSize = 0;
+                    let maxIndex = 0;
+                    groups[key].forEach((file, index) => {
+                        if(file.size > maxSize) {
+                            maxSize = file.size;
+                            maxIndex = index;
+                        }
+                    });
+                    console.log(groups[key]);
+                    groups[key]
+                        .filter((file, index) => index !== maxIndex)
+                        .forEach((file) => {
+                            fs.unlinkSync(`${dir}/${file.name}`, error => {
+                                if(error) throw error;
+                                console.log(`Deleted ${file.name}`);
+                            })
+                        });
+
+                    let oldFilename = groups[key][maxIndex].name;
+                    let newFilename = stripDuplicateNumber(groups[key][maxIndex].name);
+                    if(oldFilename.match(/\(\d+\)\.mp3$/)) {
+                        console.log(`Renaming ${oldFilename} -> ${newFilename}`);
+                        fs.renameSync(`${dir}/${oldFilename}`, `${dir}/${newFilename}`, error => {
+                            if(error) throw error;
+                            console.log(`Renamed ${oldFilename}`);
+                        });
+                    }
+                });
         });
+};
+
+const stripDuplicateNumber = (filename) => {
+    return filename.replace(/ \(.*\)\.mp3/, ".mp3");
 };
 
 //findAndRemoves.forEach((args) => findAndRemove(args));
